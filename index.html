@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="app" ng-controller="control">
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+    <title>Exercice 4</title>
+  </head>
+  <body>
+    <table cellspacing="2px" cellpadding="2px" rules="all" style="border: 1px solid black">
+        <thead>
+          <th>voiture</th>
+        </thead>
+        <tr ng-repeat="display in voiture">
+          <!-- Condition -->
+          <td ng-if="display.couleur != 'verte'">
+            {{display.marque + ' ' + display.couleur}}
+          </td>
+        </tr>
+      </table>
+    <script>
+    //Déclaration de l'appliation app
+  var app = angular.module('app', [])
+  app.controller('control', function($scope, $http){
+    //Récupération des éléments du fichier voiture.json
+    $http.get('voiture.json')
+    .then(function(res){
+      $scope.voiture = res.data;
+    });
+  });
+  </script>
+  </body>
+</html>
